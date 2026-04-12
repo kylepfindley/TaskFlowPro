@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Product Proposal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        section {
+            background: white;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        ul {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Product Name: TaskFlow Pro</h1>
+</header>
+
+<section>
+    <h2>Team Members</h2>
+    <ul>
+        <li>Only Team Member: Kyle Findley</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Application Overview</h2>
+    <p>
+        TaskFlow Pro is a task management web application designed to help users organize
+        assignments, track progress, and collaborate with team members in real time.
+    </p>
+</section>
+
+<section>
+    <h2>Technology Overview</h2>
+    <ul>
+        <li>Frontend: HTML, CSS, JavaScript</li>
+        <li>Frameworks: React (optional)</li>
+        <li>Backend: Node.js / Express</li>
+        <li>Database: MongoDB</li>
+        <li>Hosting: GitHub Pages / Vercel / Heroku</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Proposal Last Updated</h2>
+    <p>April 12, 2026</p>
+</section>
+
+<section>
+    <h2>Feature List (Prioritized)</h2>
+    <ul>
+        <li>Create, edit, and delete tasks</li>
+        <li>User login and authentication</li>
+        <li>Assign tasks to team members</li>
+        <li>Track task completion status</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Future Feature List</h2>
+    <ul>
+        <li>Real-time chat between team members</li>
+        <li>Mobile app version</li>
+        <li>Calendar integration</li>
+        <li>AI task suggestions</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Basic Technical Features</h2>
+    <ul>
+        <li>Responsive layout using CSS</li>
+        <li>DOM manipulation with JavaScript</li>
+        <li>Form validation</li>
+        <li>Local storage for saving tasks</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Advanced Technical Features</h2>
+    <ul>
+        <li>REST API integration</li>
+        <li>User authentication system (JWT)</li>
+        <li>Database CRUD operations</li>
+        <li>Real-time updates using WebSockets</li>
+    </ul>
+</section>
+
+</body>
+</html>
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
