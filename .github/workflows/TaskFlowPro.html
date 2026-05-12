@@ -1,114 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Product Proposal</title>
-    <style> 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background: #2c3e50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        section {
-            background: white;
-            margin: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: #2c3e50;
-        }
-        ul {
-            line-height: 1.6;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TaskFlow Pro</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f4f4;
+    color:#333;
+}
+
+header{
+    background:#2c3e50;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:1000px;
+    margin:20px auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+h2{
+    margin-bottom:15px;
+    color:#2c3e50;
+}
+
+input, select, button{
+    padding:10px;
+    margin:5px 0;
+    width:100%;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    background:#2c3e50;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#34495e;
+}
+
+.task{
+    background:#fafafa;
+    border-left:5px solid #2c3e50;
+    padding:15px;
+    margin-top:10px;
+    border-radius:5px;
+}
+
+.completed{
+    text-decoration:line-through;
+    opacity:0.7;
+}
+
+.task-buttons{
+    margin-top:10px;
+    display:flex;
+    gap:10px;
+}
+
+.help-box{
+    line-height:1.8;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:#2c3e50;
+    color:white;
+    margin-top:30px;
+}
+
+@media(max-width:768px){
+    .task-buttons{
+        flex-direction:column;
+    }
+}
+
+</style>
 </head>
+
 <body>
 
 <header>
-    <h1>Product Name: TaskFlow Pro</h1>
+    <h1>TaskFlow Pro</h1>
+    <p>Task Management Web Application</p>
 </header>
 
-<section>
-    <h2>Team Members</h2>
-    <ul>
-        <li>Only Team Member: Kyle Findley</li>
-    </ul>
-</section>
+<div class="container">
 
-<section>
-    <h2>Application Overview</h2>
-    <p>
-        TaskFlow Pro is a task management web application designed to help users organize
-        assignments, track progress, and collaborate with team members in real time.
-    </p>
-</section>
+    <!-- LOGIN SECTION -->
+    <div class="card">
+        <h2>User Login</h2>
 
-<section>
-    <h2>Technology Overview</h2>
-    <ul>
-        <li>Frontend: HTML, CSS, JavaScript</li>
-        <li>Frameworks: React (optional)</li>
-        <li>Backend: Node.js / Express</li>
-        <li>Database: MongoDB</li>
-        <li>Hosting: GitHub Pages / Vercel / Heroku</li>
-    </ul>
-</section>
+        <input type="text" id="username" placeholder="Enter Username">
+        <input type="password" id="password" placeholder="Enter Password">
 
-<section>
-    <h2>Proposal Last Updated</h2>
-    <p>April 12, 2026</p>
-</section>
+        <button onclick="loginUser()">Login</button>
 
-<section>
-    <h2>Feature List (Prioritized)</h2>
-    <ul>
-        <li>Create, edit, and delete tasks</li>
-        <li>User login and authentication</li>
-        <li>Assign tasks to team members</li>
-        <li>Track task completion status</li>
-    </ul>
-</section>
+        <p id="loginMessage"></p>
+    </div>
 
-<section>
-    <h2>Future Feature List</h2>
-    <ul>
-        <li>Real-time chat between team members</li>
-        <li>Mobile app version</li>
-        <li>Calendar integration</li>
-        <li>AI task suggestions</li>
-    </ul>
-</section>
+    <!-- TASK SECTION -->
+    <div class="card">
 
-<section>
-    <h2>Basic Technical Features</h2>
-    <ul>
-        <li>Responsive layout using CSS</li>
-        <li>DOM manipulation with JavaScript</li>
-        <li>Form validation</li>
-        <li>Local storage for saving tasks</li>
-    </ul>
-</section>
+        <h2>Create Task</h2>
 
-<section>
-    <h2>Advanced Technical Features</h2>
-    <ul>
-        <li>REST API integration</li>
-        <li>User authentication system (JWT)</li>
-        <li>Database CRUD operations</li>
-        <li>Real-time updates using WebSockets</li>
-    </ul>
-</section>
+        <input type="text" id="taskInput" placeholder="Enter task">
+
+        <select id="priority">
+            <option value="Low">Low Priority</option>
+            <option value="Medium">Medium Priority</option>
+            <option value="High">High Priority</option>
+        </select>
+
+        <button onclick="addTask()">Add Task</button>
+
+    </div>
+
+    <!-- FILTER -->
+    <div class="card">
+
+        <h2>Filter Tasks</h2>
+
+        <select id="filter" onchange="renderTasks()">
+            <option value="all">All Tasks</option>
+            <option value="completed">Completed</option>
+            <option value="active">Active</option>
+        </select>
+
+    </div>
+
+    <!-- TASK LIST -->
+    <div class="card">
+
+        <h2>Task List</h2>
+
+        <div id="taskList"></div>
+
+    </div>
+
+    <!-- HELP SECTION -->
+    <div class="card help-box">
+
+        <h2>Help / User Instructions</h2>
+
+        <ol>
+            <li>Login using any username and password.</li>
+            <li>Create tasks using the task form.</li>
+            <li>Select task priority levels.</li>
+            <li>Mark tasks as complete.</li>
+            <li>Edit or delete tasks anytime.</li>
+            <li>Use filters to organize completed and active tasks.</li>
+        </ol>
+
+    </div>
+
+    <!-- FEATURES SECTION -->
+    <div class="card">
+
+        <h2>Implemented Features</h2>
+
+        <ul>
+            <li>Create Tasks</li>
+            <li>Edit Tasks</li>
+            <li>Delete Tasks</li>
+            <li>Task Completion Tracking</li>
+            <li>Local Storage Data Saving</li>
+            <li>Responsive Design</li>
+        </ul>
+
+    </div>
+
+    <!-- ADVANCED FEATURES -->
+    <div class="card">
+
+        <h2>Advanced Features</h2>
+
+        <ul>
+            <li>User Authentication System</li>
+            <li>Persistent Local Storage Database</li>
+        </ul>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>TaskFlow Pro © 2026</p>
+</footer>
+
+<script>
+
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+function loginUser(){
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if(username && password){
+        document.getElementById("loginMessage").innerHTML =
+        "Logged in successfully!";
+    } else {
+        document.getElementById("loginMessage").innerHTML =
+        "Please enter username and password.";
+    }
+
+}
+
+function addTask(){
+
+    const taskInput = document.getElementById("taskInput");
+    const priority = document.getElementById("priority").value;
+
+    if(taskInput.value.trim() === ""){
+        alert("Please enter a task.");
+        return;
+    }
+
+    const task = {
+        id: Date.now(),
+        text: taskInput.value,
+        priority: priority,
+        completed: false
+    };
+
+    tasks.push(task);
+
+    saveTasks();
+
+    taskInput.value = "";
+
+    renderTasks();
+
+}
+
+function renderTasks(){
+
+    const taskList = document.getElementById("taskList");
+    const filter = document.getElementById("filter").value;
+
+    taskList.innerHTML = "";
+
+    let filteredTasks = tasks;
+
+    if(filter === "completed"){
+        filteredTasks = tasks.filter(task => task.completed);
+    }
+
+    if(filter === "active"){
+        filteredTasks = tasks.filter(task => !task.completed);
+    }
+
+    filteredTasks.forEach(task => {
+
+        const div = document.createElement("div");
+
+        div.className = "task";
+
+        if(task.completed){
+            div.classList.add("completed");
+        }
+
+        div.innerHTML = `
+            <h3>${task.text}</h3>
+            <p>Priority: ${task.priority}</p>
+
+            <div class="task-buttons">
+
+                <button onclick="toggleComplete(${task.id})">
+                    ${task.completed ? "Undo" : "Complete"}
+                </button>
+
+                <button onclick="editTask(${task.id})">
+                    Edit
+                </button>
+
+                <button onclick="deleteTask(${task.id})">
+                    Delete
+                </button>
+
+            </div>
+        `;
+
+        taskList.appendChild(div);
+
+    });
+
+}
+
+function toggleComplete(id){
+
+    tasks = tasks.map(task => {
+
+        if(task.id === id){
+            task.completed = !task.completed;
+        }
+
+        return task;
+
+    });
+
+    saveTasks();
+    renderTasks();
+
+}
+
+function editTask(id){
+
+    const newTask = prompt("Edit task:");
+
+    if(newTask){
+
+        tasks = tasks.map(task => {
+
+            if(task.id === id){
+                task.text = newTask;
+            }
+
+            return task;
+
+        });
+
+        saveTasks();
+        renderTasks();
+
+    }
+
+}
+
+function deleteTask(id){
+
+    tasks = tasks.filter(task => task.id !== id);
+
+    saveTasks();
+    renderTasks();
+
+}
+
+function saveTasks(){
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+}
+
+renderTasks();
+
+</script>
 
 </body>
 </html>
